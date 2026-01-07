@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>บอกรักเธอ 💖</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  width: 90%;
+  max-width: 350px;
+}
+button {
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+  <h1>ถึงเธอ ❤️ (แก้ชื่อได้)</h1>
+  <p>เราชอบเธอมาก ๆ เลยนะ 🥰</p>
+  <button onclick="love()">กดตรงนี้ 💕</button>
+  <p id="msg"></p>
+</div>
+
+<script>
+function love() {
+  document.getElementById("msg").innerText =
+    "รักเธอที่สุดในโลกเลย 💖";
+}
+</script>
+</body>
+</html>
