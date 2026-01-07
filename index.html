@@ -2,48 +2,137 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>บอกรักเธอ 💖</title>
+<title>มีอะไรจะบอกไอ้อ้วนไนซ์ 💖</title>
+
 <style>
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
   height: 100vh;
+  overflow: hidden;
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
+
 .card {
+  position: relative;
+  z-index: 2;
   background: white;
   padding: 30px;
   border-radius: 20px;
-  text-align: center;
   width: 90%;
-  max-width: 350px;
+  max-width: 360px;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,.2);
 }
+
+h1 { color: #ff4d6d; }
+
+#type {
+  min-height: 60px;
+  font-size: 18px;
+}
+
 button {
+  margin: 10px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.yes {
   background: #ff4d6d;
   color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 25px;
+}
+
+.no {
+  background: #ccc;
+  position: absolute;
+}
+
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: float 6s linear forwards;
+}
+
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
+
 <div class="card">
-  <h1>ถึงเธอ ❤️ (แก้ชื่อได้)</h1>
-  <p>เราชอบเธอมาก ๆ เลยนะ 🥰</p>
-  <button onclick="love()">กดตรงนี้ 💕</button>
-  <p id="msg"></p>
+  <h1>ใครเอ่ยอ้วนที่สุด</h1>
+  <p id="type"></p>
+
+  <button class="yes" onclick="accept()">ไนซ์เอง</button>
+  <button class="no" id="no">นาย 🙈</button>
+
+  <p id="result"></p>
+
+  <button onclick="playMusic()">🎶 เปิดเพลง</button>
+  <audio id="music" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_5c2d92e8c4.mp3">
+  </audio>
 </div>
 
 <script>
-function love() {
-  document.getElementById("msg").innerText =
-    "รักเธอที่สุดในโลกเลย 💖";
+// พิมพ์ดีด
+const text = "เค้ารักอ้วนนะ \nเขียนตั้งชั่วโมงนึง";
+let i = 0;
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("type").innerHTML +=
+      text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 60);
+  }
+}
+typeWriter();
+
+// ปุ่มไม่เอาหนี
+const no = document.getElementById("no");
+no.addEventListener("touchstart", move);
+no.addEventListener("mouseover", move);
+
+function move() {
+  no.style.left = Math.random() * 200 + "px";
+  no.style.top = Math.random() * 200 + "px";
+}
+
+// ตอบตกลง
+function accept() {
+  document.getElementById("result").innerText =
+    "เย้!!! รักอ้วนที่สุด 💖💖💖";
+}
+
+// หัวใจลอย
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 15 + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 300);
+
+// เพลง
+function playMusic() {
+  document.getElementById("music").play();
 }
 </script>
+
 </body>
 </html>
